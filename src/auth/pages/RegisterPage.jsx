@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
@@ -5,7 +6,6 @@ import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material'
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
 import { startCreatingUserWithEmailPassword } from '../../store/auth';
-import { useMemo } from 'react';
 
 const formData = {
 	displayName: '',
@@ -14,14 +14,15 @@ const formData = {
 }
 
 const formValidations = {
-	email: [ ( value ) => value.includes('@'), 'El correo debe tener un @.' ],
-	password: [ ( value ) => value.length >= 6, 'El password debe de tener más de 6 caracteres.' ],
-	displayName: [ ( value ) => value.length >= 1, 'El nombre es obligatorio.' ]
+	email: [(value) => value.includes('@'), 'El correo debe tener un @.'],
+	password: [(value) => value.length >= 6, 'El password debe de tener más de 6 caracteres.'],
+	displayName: [(value) => value.length >= 1, 'El nombre es obligatorio.']
 }
 
 export const RegisterPage = () => {
 
 	const dispatch = useDispatch();
+
 	const [formSubmmited, setFormSubmmited] = useState( false );
 
 	const { status, errorMessage } = useSelector( state => state.auth );
@@ -34,7 +35,6 @@ export const RegisterPage = () => {
 
 
 	const onSubmit = ( event ) => {
-
 		event.preventDefault();
 		setFormSubmmited( true );
 

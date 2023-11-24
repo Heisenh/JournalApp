@@ -4,73 +4,73 @@ import { FirebaseAuth } from './';
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signWithGoogle = async() => {
-    try {
-        
-        const result = await signInWithPopup( FirebaseAuth, googleProvider );
-        // const credentials = GoogleAuthProvider.credentialFromResult( result );
-        const { displayName, email, photoURL, uid } = result.user;
+export const signWithGoogle = async () => {
+  try {
 
-        return {
-            ok: true,
-            // User info
-            displayName, email, photoURL, uid,
-        }
+    const result = await signInWithPopup(FirebaseAuth, googleProvider);
+    // const credentials = GoogleAuthProvider.credentialFromResult( result );
+    const { displayName, email, photoURL, uid } = result.user;
 
-    } catch (error) {
-        
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        return {
-            ok: false,
-            errorMessage,
-        }
+    return {
+      ok: true,
+      // User info
+      displayName, email, photoURL, uid,
     }
+
+  } catch (error) {
+
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    return {
+      ok: false,
+      errorMessage,
+    }
+  }
 }
 
 
-export const registerUserWithEmailPassword = async({ email, password, displayName }) => {
-    try {
+export const registerUserWithEmailPassword = async ({ email, password, displayName }) => {
+  try {
 
-        const resp = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
-        const { uid, photoURL } = resp.user;
+    const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
+    const { uid, photoURL } = resp.user;
 
-        // TODO: Actualizar el displayName en Firebase
-        await updateProfile( FirebaseAuth.currentUser, { displayName } );
+    // TODO: Actualizar el displayName en Firebase
+    await updateProfile(FirebaseAuth.currentUser, { displayName });
 
-        return {
-            ok: true,
-            uid, photoURL, email, displayName
-        }
-        
-        
-    } catch (error) {
-        console.log(error);
-        return { ok: false, errorMessage: error.message }
+    return {
+      ok: true,
+      uid, photoURL, email, displayName
     }
+
+
+  } catch (error) {
+    console.log(error);
+    return { ok: false, errorMessage: error.message }
+  }
 }
 
 
-export const loginWithEmailPassword = async({ email, password }) => {
-    try {
-        
-        const resp = await signInWithEmailAndPassword( FirebaseAuth, email, password );
-        const { uid, photoURL, displayName } = resp.user;
+export const loginWithEmailPassword = async ({ email, password }) => {
+  try {
 
-        return {
-            ok: true,
-            uid, photoURL, displayName,
-        }
+    const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
+    const { uid, photoURL, displayName } = resp.user;
 
-    } catch (error) {
-        console.log(error);
-        return { ok: false, errorMessage: error.message }
-    
+    return {
+      ok: true,
+      uid, photoURL, displayName,
     }
+
+  } catch (error) {
+    console.log(error);
+    return { ok: false, errorMessage: error.message }
+
+  }
 }
 
 
 export const logoutFirebase = async () => {
-    return await FirebaseAuth.signOut();
+  return await FirebaseAuth.signOut();
 }
