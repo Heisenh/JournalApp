@@ -1,4 +1,4 @@
 
 export * from './loadNotes';
 export * from './fileUpload';
-export * from './getEvironments';
+export * from './getEnvironments';
