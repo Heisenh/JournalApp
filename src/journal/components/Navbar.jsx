@@ -32,7 +32,7 @@ export const Navbar = ({ drawerWidth = 240 }) => {
           <Typography variant='h6' noWrap component='div'>JournalApp</Typography>
 
           <IconButton
-            color='error'
+            style={{color:'#5c3674'}}
             onClick={onLogout}
           >
             <LogoutOutlined />

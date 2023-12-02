@@ -14,7 +14,7 @@ const {
   VITE_STORAGEBUCKET,
   VITE_MESSAGINGSENDERID,
   VITE_APPID,
-} = getEnvironments;
+} = getEnvironments();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
